@@ -21,11 +21,11 @@ struct MainTabView: View {
     TabView {
       AlertsExampleView()
         .tabItem {
-          Label("Alert", systemImage: "play")
+          Label("Alert", systemImage: "light.beacon.max")
         }
       ToastsExampleView()
         .tabItem {
-          Label("Toast", systemImage: "play")
+          Label("Toast", systemImage: "square.bottomthird.inset.filled")
         }
     }
   }
