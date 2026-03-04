@@ -5,9 +5,12 @@ import UIKit
 
 public struct Instant {
   public struct Configuration {
-    public var okText = "OK"
-    public var cancelText = "Cancel"
-    public var confirmText = "Confirm"
+    // Alerts
+    public var alertOkText = "OK"
+    public var alertCancelText = "Cancel"
+    public var alertConfirmText = "Confirm"
+    
+    // Toasts
   }
   
   @MainActor public static var configuration = Configuration()
@@ -26,7 +29,7 @@ public struct Instant {
     return alert
   }
   
-  @MainActor private static func presentInMainAsync(
+  @MainActor static func presentInMainAsync(
     _ vc: UIViewController,
     animated isAnimated: Bool,
     completion: (() -> Void)? = nil
@@ -39,14 +42,6 @@ public struct Instant {
   }
   
   /// 간단한 OK 버튼 하나만 있는 UIAlert을 표시합니다.
-  ///
-  /// ## 사용 예시
-  /// ```swift
-  /// Instant.showSimpleAlert(
-  ///   "Title",
-  ///   message: "Message"
-  /// )
-  /// ```
   ///
   /// - Parameters:
   ///   - title: Alert의 제목 텍스트
@@ -66,7 +61,7 @@ public struct Instant {
   ) {
     let alert = Self.makeEmptyAlert(title: title, message: message, preferredStyle: .alert)
     let alertAction = UIAlertAction(
-      title: okText ?? configuration.okText,
+      title: okText ?? configuration.alertOkText,
       style: .default,
       handler: okHandler
     )
@@ -76,17 +71,6 @@ public struct Instant {
   }
   
   /// 취소/확인 두 개의 버튼이 있는 확인용 UIAlert을 표시합니다.
-  ///
-  /// ## 사용 예시
-  /// ```swift
-  /// Instant.showConfirmAlert(
-  ///   "Delete Item",
-  ///   message: "Are you sure?",
-  ///   isDestructiveConfirm: true
-  /// ) { _ in
-  ///   print("Confirmed")
-  /// }
-  /// ```
   ///
   /// - Parameters:
   ///   - title: Alert의 제목 텍스트
@@ -111,12 +95,12 @@ public struct Instant {
   ) {
     let alert = Self.makeEmptyAlert(title: title, message: message, preferredStyle: .alert)
     let cancelAction = UIAlertAction(
-      title: cancelText ?? configuration.cancelText,
+      title: cancelText ?? configuration.alertCancelText,
       style: .cancel,
       handler: cancelHandler
     )
     let confirmAction = UIAlertAction(
-      title: confirmText ?? configuration.confirmText,
+      title: confirmText ?? configuration.alertConfirmText,
       style: isDestructiveConfirm ? .destructive : .default,
       handler: confirmHandler
     )
@@ -127,19 +111,6 @@ public struct Instant {
   }
   
   /// 여러 개의 UIAlertAction을 커스텀으로 추가할 수 있는 UIAlert을 표시합니다.
-  ///
-  /// ## 사용 예시
-  /// ```swift
-  /// Instant.showAlertWithMultipleActions(
-  ///   "Select Option"
-  /// ) {
-  ///   [
-  ///     UIAlertAction(title: "One", style: .default),
-  ///     UIAlertAction(title: "Two", style: .default),
-  ///     UIAlertAction(title: "Cancel", style: .cancel)
-  ///   ]
-  /// }
-  /// ```
   ///
   /// - Parameters:
   ///   - title: Alert의 제목 텍스트
@@ -163,33 +134,3 @@ public struct Instant {
 
 
 
-extension UIApplication {
-  var firstScene: UIWindowScene? {
-    self.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
-  }
-  
-  var firstWindow: UIWindow? {
-    guard let scene = firstScene else { return nil }
-    return scene.windows.first(where: { $0.isKeyWindow })
-  }
-  
-  var currentRootViewController: UIViewController? {
-    firstWindow?.rootViewController
-  }
-}
-
-extension UIViewController {
-  
-  /// 현재 표시된 최상위 뷰 컨트롤러 반환
-  func getTopMostViewController() -> UIViewController {
-    if let presentedViewController = self.presentedViewController {
-      return presentedViewController.getTopMostViewController()
-    } else if let navigationController = self as? UINavigationController {
-      return navigationController.visibleViewController?.getTopMostViewController() ?? navigationController
-    } else if let tabBarController = self as? UITabBarController {
-      return tabBarController.selectedViewController?.getTopMostViewController() ?? tabBarController
-    } else {
-      return self
-    }
-  }
-}

@@ -64,9 +64,9 @@ struct ContentView: View {
     }
     .padding()
     .onAppear {
-      Instant.configuration.okText = "알겠습니다"
-      Instant.configuration.confirmText = "확인"
-      Instant.configuration.cancelText = "취소"
+      Instant.configuration.alertOkText = "알겠습니다"
+      Instant.configuration.alertConfirmText = "확인"
+      Instant.configuration.alertCancelText = "취소"
     }
   }
 }
