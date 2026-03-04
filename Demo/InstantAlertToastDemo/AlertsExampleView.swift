@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  AlertsExampleView.swift
 //  InstantAlertToastDemo
 //
 //  Created by 윤범태 on 3/3/26.
@@ -8,7 +8,7 @@
 import SwiftUI
 import InstantAlertToast
 
-struct ContentView: View {
+struct AlertsExampleView: View {
   @State private var status = "[status]"
   
   var body: some View {
@@ -61,16 +61,17 @@ struct ContentView: View {
           ]
         }
       }
+      Spacer()
     }
     .padding()
     .onAppear {
-      Instant.configuration.alertOkText = "알겠습니다"
-      Instant.configuration.alertConfirmText = "확인"
-      Instant.configuration.alertCancelText = "취소"
+      Instant.configuration.alertOkText = "알겠습니다(OK)"
+      Instant.configuration.alertConfirmText = "확인(Confirm)"
+      Instant.configuration.alertCancelText = "취소(Cancel)"
     }
   }
 }
 
 #Preview {
-  ContentView()
+  AlertsExampleView()
 }

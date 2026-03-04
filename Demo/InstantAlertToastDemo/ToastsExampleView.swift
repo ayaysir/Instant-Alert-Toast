@@ -9,24 +9,35 @@ import SwiftUI
 import InstantAlertToast
 
 // MARK: - Main
-struct ToastExampleView: View {
+struct ToastsExampleView: View {
+  @State private var status = "[status]"
+  
   var body: some View {
     VStack {
-      Button("toast 1") {
-        Instant.showSmallToast("로딩 중", subtitle: "데이터를 가져오는 중...", icon: .spinnerSmall)
+      Text(verbatim: status)
+      Divider()
+      
+      Button("Toast 1: small") {
+        Instant.showSmallToast("Loading", subtitle: "Fetching data...", icon: .spinnerSmall)
       }
-      Button("toast 2") {
-        Instant.showSmallToast("삭제되었습니다", subtitle: nil, icon: .heart, dismissByTap: false, duration: 3)
+      
+      Button("Toast 2: small without icon") {
+        Instant.showSmallToast("Deleted", subtitle: nil, icon: nil, dismissByTap: false, duration: 3)
         
       }
-      Button("toast 3") {
-        Instant.showMediumToast("삭제되었습니다", subtitle: "중간 크기", icon: .heart, dismissByTap: true)
-        
+      
+      Button("Toast 3: medium") {
+        Instant.showMediumToast("Deleted", subtitle: "Medium size", icon: .heart, dismissByTap: true)
       }
-      Button("toast 4") {
+      
+      Button("Toast 4: medium without icon") {
+        Instant.showMediumToast("Deleted", subtitle: "Medium size", icon: nil, dismissByTap: true)
+      }
+      
+      Button("Toast 5: medium with options") {
         Instant.showMediumToast(
-          "로딩 중",
-          subtitle: "데이터를 가져오는 중입니다...",
+          "Loading",
+          subtitle: "Fetching data...",
           icon: .custom(UIImage(systemName: "trash")!),
           dismissByTap: true,
           dismissInTime: true,
@@ -36,13 +47,37 @@ struct ToastExampleView: View {
           }
       }
       
+      Button("Toast 6: special toast with custom icon") {
+        Instant.showSmallToastWithButton(
+          "Loading",
+          subtitle: "Fetching data...",
+          icon: .custom(UIImage(systemName: "trash")!),
+          dismissByTap: true,
+          dismissInTime: true,
+          duration: 2,
+          haptic: .success) {
+            print("Present Handler")
+          } actionButtonHandler: { dismiss in
+            status = "[toast 6] action button tapped"
+            dismiss()
+          }
+      }
+      
+      Button("Toast 7: special toast without icon") {
+        Instant.showSmallToastWithButton("Deleted.", actionButtonHandler:  { dismiss in
+          status = "[toast 7] action button tapped (\(Int.random(in: 100...999)))"
+          // without dismiss
+        })
+      }
+      
       Spacer()
     }
+    .padding()
   }
 }
 
 
 // MARK: - #Preview
 #Preview {
-  ToastExampleView()
+  ToastsExampleView()
 }

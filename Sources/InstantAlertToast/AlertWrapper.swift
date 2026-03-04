@@ -1,5 +1,9 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+//
+//  AlertWrapper.swift
+//  InstantAlertToast
+//
+//  Created by 윤범태 on 3/4/26.
+//
 
 import UIKit
 
@@ -41,15 +45,15 @@ public struct Instant {
     }
   }
   
-  /// 간단한 OK 버튼 하나만 있는 UIAlert을 표시합니다.
+  /// Displays a UIAlert with a single OK button.
   ///
   /// - Parameters:
-  ///   - title: Alert의 제목 텍스트
-  ///   - message: Alert의 본문 메시지 (옵션)
-  ///   - okText: OK 버튼에 표시될 텍스트 (기본값: "OK")
-  ///   - isAnimated: 표시 애니메이션 여부
-  ///   - alertPresentHandler: Alert가 present된 직후 호출되는 클로저
-  ///   - okHandler: OK 버튼 탭 시 실행되는 클로저
+  ///   - title: The title text of the alert.
+  ///   - message: The message body of the alert (optional).
+  ///   - okText: The text displayed on the OK button (default: "OK").
+  ///   - isAnimated: A Boolean value indicating whether the alert presentation is animated.
+  ///   - alertPresentHandler: A closure called immediately after the alert is presented.
+  ///   - okHandler: A closure executed when the OK button is tapped.
   @MainActor
   public static func showSimpleAlert(
     _ title: String,
@@ -70,18 +74,18 @@ public struct Instant {
     Self.presentInMainAsync(alert, animated: isAnimated, completion: alertPresentHandler)
   }
   
-  /// 취소/확인 두 개의 버튼이 있는 확인용 UIAlert을 표시합니다.
+  /// Displays a confirmation UIAlert with Cancel and Confirm buttons.
   ///
   /// - Parameters:
-  ///   - title: Alert의 제목 텍스트
-  ///   - message: Alert의 본문 메시지 (옵션)
-  ///   - cancelText: 취소 버튼 텍스트 (기본값: "Cancel")
-  ///   - confirmText: 확인 버튼 텍스트 (기본값: "Confirm")
-  ///   - isDestructiveConfirm: 확인 버튼을 destructive 스타일로 표시할지 여부
-  ///   - isAnimated: 표시 애니메이션 여부
-  ///   - alertPresentHandler: Alert가 present된 직후 호출되는 클로저
-  ///   - cancelHandler: 취소 버튼 탭 시 실행되는 클로저
-  ///   - confirmHandler: 확인 버튼 탭 시 실행되는 클로저
+  ///   - title: The title text of the alert.
+  ///   - message: The message body of the alert (optional).
+  ///   - cancelText: The text displayed on the Cancel button (default: "Cancel").
+  ///   - confirmText: The text displayed on the Confirm button (default: "Confirm").
+  ///   - isDestructiveConfirm: A Boolean value indicating whether the Confirm button uses the destructive style.
+  ///   - isAnimated: A Boolean value indicating whether the alert presentation is animated.
+  ///   - alertPresentHandler: A closure called immediately after the alert is presented.
+  ///   - cancelHandler: A closure executed when the Cancel button is tapped.
+  ///   - confirmHandler: A closure executed when the Confirm button is tapped.
   @MainActor public static func showConfirmAlert(
     _ title: String,
     message: String? = nil,
@@ -110,13 +114,13 @@ public struct Instant {
     Self.presentInMainAsync(alert, animated: isAnimated, completion: alertPresentHandler)
   }
   
-  /// 여러 개의 UIAlertAction을 커스텀으로 추가할 수 있는 UIAlert을 표시합니다.
+  /// Displays a UIAlert that allows adding multiple custom UIAlertAction items.
   ///
   /// - Parameters:
-  ///   - title: Alert의 제목 텍스트
-  ///   - message: Alert의 본문 메시지 (옵션)
-  ///   - isAnimated: 표시 애니메이션 여부
-  ///   - actions: UIAlertAction 배열을 반환하는 클로저
+  ///   - title: The title text of the alert.
+  ///   - message: The message body of the alert (optional).
+  ///   - isAnimated: A Boolean value indicating whether the alert presentation is animated.
+  ///   - actions: A closure that returns an array of UIAlertAction instances to be added to the alert.
   @MainActor public static func showAlertWithMultipleActions(
     _ title: String,
     message: String? = nil,
@@ -131,6 +135,3 @@ public struct Instant {
     Self.presentInMainAsync(alert, animated: isAnimated)
   }
 }
-
-
-
