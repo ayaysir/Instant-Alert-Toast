@@ -278,13 +278,13 @@ internal class AlertAppleMusic17With1ButtonView: UIView, @MainActor AlertViewPro
     
     let usingWidth = min(currentNeedWidth, maxWidth)
     layout(maxWidth: usingWidth)
-    print(#function, usingWidth, currentNeedWidth, maxWidth)
+    // print(#function, usingWidth, currentNeedWidth, maxWidth)
     let height = subtitleLabel?.frame.maxY ?? titleLabel?.frame.maxY ?? .zero
     return .init(width: usingWidth, height: height + layoutMargins.bottom)
   }
   
   private func layout(maxWidth: CGFloat?) {
-    print(#function, maxWidth)
+    // print(#function, maxWidth)
     let spaceBetweenLabelAndIcon: CGFloat = 12
     let spaceBetweenTitleAndSubtitle: CGFloat = 4
     

@@ -43,7 +43,7 @@ struct ToastsExampleView: View {
           dismissInTime: true,
           duration: 2,
           haptic: .success) {
-            print("dkd")
+            print("[5] Present Handler")
           }
       }
       
@@ -56,7 +56,7 @@ struct ToastsExampleView: View {
           dismissInTime: true,
           duration: 2,
           haptic: .success) {
-            print("Present Handler")
+            print("[6] Present Handler")
           } actionButtonHandler: { dismiss in
             status = "[toast 6] action button tapped"
             dismiss()
