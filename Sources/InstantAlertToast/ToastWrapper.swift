@@ -84,6 +84,7 @@ public extension Instant {
   ///   - title: The main title text of the toast.
   ///   - subtitle: The optional subtitle text displayed below the title.
   ///   - icon: An optional icon displayed alongside the text.
+  ///   - actionButtonTitle: The title displayed on the action button.
   ///   - dismissByTap: A Boolean value indicating whether the toast can be dismissed by tapping.
   ///   - dismissInTime: A Boolean value indicating whether the toast dismisses automatically after a duration.
   ///   - duration: The time interval after which the toast is dismissed automatically.
@@ -94,6 +95,7 @@ public extension Instant {
     _ title: String,
     subtitle: String? = nil,
     icon: AlertIcon? = nil,
+    actionButtonTitle: String? = nil,
     dismissByTap: Bool = true,
     dismissInTime: Bool = true,
     duration: TimeInterval = 1.5,
@@ -113,7 +115,8 @@ public extension Instant {
     Self.currentSpecialSmallToast = AlertAppleMusic17With1ButtonView(
       title: title,
       subtitle: subtitle,
-      icon: icon
+      icon: icon,
+      buttonTitle: actionButtonTitle
     ) { dismiss in
       actionButtonHandler?(dismiss)
     }

@@ -70,6 +70,18 @@ struct ToastsExampleView: View {
         })
       }
       
+      Button("Toast 8: special toast with changed button title, calling another toast") {
+        Instant.showSmallToastWithButton(
+          "Chat deleted",
+          icon: .done,
+          actionButtonTitle: "Mute",
+          actionButtonHandler:  { dismiss in
+          status = "[toast 8] action button tapped"
+            dismiss()
+            Instant.showSmallToast("Muted", duration: 0.8)
+        })
+      }
+      
       Spacer()
     }
     .padding()
