@@ -14,7 +14,13 @@ struct ToastsExampleView: View {
   
   var body: some View {
     VStack {
-      Text(verbatim: status)
+      HStack {
+        Text(verbatim: status)
+        Button("Dismiss All") {
+          Instant.dismissAllToasts()
+        }
+        .buttonStyle(.bordered)
+      }
       Divider()
       
       Button("Toast 1: small") {

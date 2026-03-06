@@ -75,7 +75,9 @@ public extension Instant {
     toast.duration = duration
     toast.haptic = haptic
     
-    toast.present(on: topViewController.view, completion: toastPresentHandler)
+    if let window = UIApplication.shared.firstWindow {
+      toast.present(on: window, completion: toastPresentHandler)
+    }
   }
   
   /// Displays a small toast message with a single action button.
@@ -137,7 +139,9 @@ public extension Instant {
     toast.duration = duration
     toast.haptic = haptic
     
-    toast.present(on: topViewController.view, completion: toastPresentHandler)
+    if let window = UIApplication.shared.firstWindow {
+      toast.present(on: window, completion: toastPresentHandler)
+    }
   }
   
   /// Displays a medium-sized toast message.
@@ -192,6 +196,8 @@ public extension Instant {
     toast.duration = duration
     toast.haptic = haptic
     
-    toast.present(on: topViewController.view, completion: toastPresentHandler)
+    if let window = UIApplication.shared.firstWindow {
+      toast.present(on: window, completion: toastPresentHandler)
+    }
   }
 }
